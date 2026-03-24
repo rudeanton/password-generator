@@ -1,13 +1,10 @@
-let passwordLength = 12;
 const lowerCaseChars = "abcdefghijklmnopqrstuvwxyz";
 const upperCaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const symbolChars = "~`!@#$%^&*()_+=-[]}{;':/?";
 const numberChars = "1234567890";
-
-let includesLowerCaseChars = true;
-let includesUpperCaseChars = true;
-let includesSymbolChars = true;
-let includesNumberChars = true;
+const generateBtn = document.querySelector("#generateBtn");
+const passwordResult = document.querySelector("#passwordResult");
+const copyBtn = document.querySelector("#copyBtn");
 
 function passwordGenerate(
   passwordLength,
@@ -25,25 +22,50 @@ function passwordGenerate(
   ].filter(Boolean).length;
   const numOfIterations = passwordLength / countIncludes;
 
-  for (let i = 0; i <= numOfIterations; i++) {
-    if (password.length < passwordLength && includesLowerCaseChars == true) {
-      password +=
-        lowerCaseChars[Math.floor(Math.random() * lowerCaseChars.length)];
+  if (passwordLength > 1) {
+    for (let i = 0; i <= numOfIterations; i++) {
+      if (password.length < passwordLength && includesLowerCaseChars == true) {
+        password +=
+          lowerCaseChars[Math.floor(Math.random() * lowerCaseChars.length)];
+      }
+      if (password.length < passwordLength && includesUpperCaseChars == true) {
+        password +=
+          upperCaseChars[Math.floor(Math.random() * upperCaseChars.length)];
+      }
+      if (password.length < passwordLength && includesSymbolChars == true) {
+        password += symbolChars[Math.floor(Math.random() * symbolChars.length)];
+      }
+      if (password.length < passwordLength && includesNumberChars == true) {
+        password += numberChars[Math.floor(Math.random() * numberChars.length)];
+      }
     }
-    if (password.length < passwordLength && includesUpperCaseChars == true) {
-      password +=
-        upperCaseChars[Math.floor(Math.random() * upperCaseChars.length)];
-    }
-    if (password.length < passwordLength && includesSymbolChars == true) {
-      password += symbolChars[Math.floor(Math.random() * symbolChars.length)];
-    }
-    if (password.length < passwordLength && includesNumberChars == true) {
-      password += numberChars[Math.floor(Math.random() * numberChars.length)];
-    }
+    return password;
+  } else {
+    return `Password must contain at least 1 character`;
   }
-  return password;
 }
 
-const password = passwordGenerate(4, true, true, true, true);
+generateBtn.addEventListener("click", () => {
+  let passwordLength = document.querySelector("#inputNumber").value;
+  let includesLowerCaseChars = document.querySelector(".lower").checked;
+  let includesUpperCaseChars = document.querySelector(".upper").checked;
+  let includesSymbolChars = document.querySelector(".sym").checked;
+  let includesNumberChars = document.querySelector(".numb").checked;
 
-console.log(password);
+  const result = passwordGenerate(
+    passwordLength,
+    includesLowerCaseChars,
+    includesUpperCaseChars,
+    includesSymbolChars,
+    includesNumberChars,
+  );
+
+  passwordResult.style.display = "flex";
+  passwordText.textContent = result;
+
+  copyBtn.addEventListener("click", () => {
+    const text = result;
+    navigator.clipboard.writeText(result);
+    console.log("Copied", result);
+  });
+});
