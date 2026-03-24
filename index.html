@@ -7,6 +7,33 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
+    <div class="card">
+      <h1>Password generator:</h1>
+      <ul class="settings">
+        <li>
+          <span id="settingtext">Password length</span>
+          <input type="number" id="inputNumber" value="12" min="0" />
+        </li>
+        <li>
+          <span id="settingtext">Include lower case</span>
+          <input type="checkbox" class="inputTick" checked />
+        </li>
+        <li>
+          <span id="settingtext">Include upper case</span>
+          <input type="checkbox" class="inputTick" checked />
+        </li>
+        <li>
+          <span id="settingtext">Include symbols</span>
+          <input type="checkbox" class="inputTick" checked />
+        </li>
+        <li>
+          <span id="settingtext">Include numbers</span>
+          <input type="checkbox" class="inputTick" checked />
+        </li>
+      </ul>
+      <button id="generateBtn">GENERATE</button>
+      <h2 id="passwordResult">123 <span id="copyBtn">📃</span></h2>
+    </div>
     <script src="./index.js"></script>
   </body>
 </html>
