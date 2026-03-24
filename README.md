@@ -22,6 +22,6 @@ A laconic password generator built with JavaScript.
 ## How to use:
 
 1. Set the desired password length
-2. Select the options wou want
+2. Select the options you want
 3. Click "Generate"
 4. Copy the result by clicking to the emoji
